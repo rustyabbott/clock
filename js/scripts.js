@@ -8,9 +8,10 @@ function paintCanvas() {
   // Clear the canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Draw outer circles
+  // Draw circles
   outerCircleOut();
   outerCircleIn();
+  centerCircle();
 
   function outerCircleOut() {
     ctx.beginPath();
@@ -22,6 +23,14 @@ function paintCanvas() {
   function outerCircleIn() {
     ctx.beginPath();
     ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2 - 14, 0, Math.PI * 2);
+    ctx.strokeStyle = '#fff';
+    ctx.stroke();
+  }
+
+  // Draw small center circle
+  function centerCircle() {
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, 4, 0, Math.PI * 2);
     ctx.strokeStyle = '#fff';
     ctx.stroke();
   }
