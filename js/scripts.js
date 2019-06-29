@@ -14,6 +14,7 @@ function paintCanvas() {
   outerCircleIn();
   centerCircle();
   hourNotches();
+  minuteNotches();
 
   function outerCircleOut() {
     ctx.beginPath();
@@ -42,10 +43,25 @@ function paintCanvas() {
     for (let i = 0; i < 12; i++) {
       let angle = (i - 3) * (Math.PI * 2) / 12;
       ctx.beginPath();
-      let x1 = (canvas.width / 2) + Math.cos(angle) * (secondHandLength);
-      let y1 = (canvas.height / 2) + Math.sin(angle) * (secondHandLength);
-      let x2 = (canvas.width / 2) + Math.cos(angle) * (secondHandLength - (secondHandLength / 8));
-      let y2 = (canvas.height / 2) + Math.sin(angle) * (secondHandLength - (secondHandLength / 8));
+      let x1 = canvas.width / 2 + Math.cos(angle) * secondHandLength;
+      let y1 = canvas.height / 2 + Math.sin(angle) * secondHandLength;
+      let x2 = canvas.width / 2 + Math.cos(angle) * (secondHandLength - secondHandLength / 8);
+      let y2 = canvas.height / 2 + Math.sin(angle) * (secondHandLength - secondHandLength / 8);
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    }
+  }
+
+  // Draw the minute notches
+  function minuteNotches() {
+    for (let i = 0; i < 60; i++) {
+      let angle = (i - 3) * (Math.PI * 2) / 60;
+      ctx.beginPath();
+      let x1 = canvas.width / 2 + Math.cos(angle) * secondHandLength;
+      let y1 = canvas.width / 2 + Math.sin(angle) * secondHandLength;
+      let x2 = canvas.width / 2 + Math.cos(angle) * (secondHandLength - secondHandLength / 30);
+      let y2 = canvas.width / 2 + Math.sin(angle) * (secondHandLength - secondHandLength / 30);
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
       ctx.stroke();
