@@ -9,6 +9,7 @@ html {
 }
 
 body {
+  border: 1px solid #fff;
   margin: 0;
   padding: 22px;
   background-color: #191919;
@@ -16,8 +17,6 @@ body {
   width: 100%;
 }
 
-canvas {
+#canvas {
   border: 1px solid #fff;
-  height: 400px;
-  width: 400px;
 }
