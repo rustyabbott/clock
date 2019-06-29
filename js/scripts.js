@@ -15,6 +15,7 @@ function paintCanvas() {
   centerCircle();
   hourNotches();
   minuteNotches();
+  hourHand();
 
   function outerCircleOut() {
     ctx.beginPath();
@@ -66,5 +67,19 @@ function paintCanvas() {
       ctx.lineTo(x2, y2);
       ctx.stroke();
     }
+  }
+
+  // Draw the hour hand
+  function hourHand() {
+    let date = new Date();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+    let sec = date.getSeconds();
+    console.log('The time is ' + hour + ':' + min + ':' + sec);
+    let angle = ((Math.PI * 2) * ((hour * 5 + (min / 60) * 5) / 60)) - ((Math.PI * 2) / 4);
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height / 2);
+    ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength / 1.4), canvas.height / 2 + Math.sin(angle) * secondHandLength / 1.4);
+    ctx.stroke();
   }
 }
