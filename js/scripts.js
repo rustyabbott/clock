@@ -6,6 +6,8 @@ let secondHandLength = canvas.width / 2 - 16;
 setInterval(paintCanvas, 1000);
 
 function paintCanvas() {
+  let date = new Date();
+
   // Clear the canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -16,6 +18,7 @@ function paintCanvas() {
   hourNotches();
   minuteNotches();
   hourHand();
+  minuteHand();
 
   function outerCircleOut() {
     ctx.beginPath();
@@ -71,15 +74,25 @@ function paintCanvas() {
 
   // Draw the hour hand
   function hourHand() {
-    let date = new Date();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+    let angle = ((Math.PI * 2) * ((hour * 5 + (min / 60) * 5) / 60)) - ((Math.PI * 2) / 4);
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height / 2);
+    ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength / 1.6), canvas.height / 2 + Math.sin(angle) * secondHandLength / 1.6);
+    ctx.stroke();
+  }
+
+  // Draw the minute hand
+  function minuteHand() {
     let hour = date.getHours();
     let min = date.getMinutes();
     let sec = date.getSeconds();
     console.log('The time is ' + hour + ':' + min + ':' + sec);
-    let angle = ((Math.PI * 2) * ((hour * 5 + (min / 60) * 5) / 60)) - ((Math.PI * 2) / 4);
+    let angle = ((Math.PI * 2) * (min / 60) - ((Math.PI * 2)) / 4);
     ctx.beginPath();
     ctx.moveTo(canvas.width / 2, canvas.height / 2);
-    ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength / 1.4), canvas.height / 2 + Math.sin(angle) * secondHandLength / 1.4);
+    ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength / 1.3), canvas.height / 2 + Math.sin(angle) * secondHandLength / 1.3);
     ctx.stroke();
   }
 }
