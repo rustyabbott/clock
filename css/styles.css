@@ -10,13 +10,37 @@ html {
 
 body {
   border: 1px solid #fff;
-  margin: 0;
   padding: 22px;
   background-color: #191919;
+  margin: 0;
   height: 100vh;
+}
+
+.container {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "canvas"
+    "themes"
+    "footer";
   width: 100%;
 }
 
-#canvas {
+header {
+  grid-area: header;
+}
+
+canvas {
+  grid-area: canvas;
   border: 1px solid #fff;
+  margin: 0 auto;
+}
+
+.themes {
+  grid-area: themes;
+  margin: 0 auto;
+}
+
+footer {
+  grid-area: footer;
 }
