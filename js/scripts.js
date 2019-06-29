@@ -19,6 +19,7 @@ function paintCanvas() {
   minuteNotches();
   hourHand();
   minuteHand();
+  secondHand();
 
   function outerCircleOut() {
     ctx.beginPath();
@@ -93,6 +94,18 @@ function paintCanvas() {
     ctx.beginPath();
     ctx.moveTo(canvas.width / 2, canvas.height / 2);
     ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength / 1.3), canvas.height / 2 + Math.sin(angle) * secondHandLength / 1.3);
+    ctx.stroke();
+  }
+
+  // Draw the second hand
+  function secondHand() {
+    let sec = date.getSeconds();
+    let angle = ((Math.PI * 2) * (sec / 60)) - Math.PI * 2 / 4;
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height / 2);
+    ctx.lineTo((canvas.width / 2 - Math.cos(angle) * 20), canvas.height / 2 - Math.sin(angle) * 22);
+    ctx.moveTo(canvas.width / 2, canvas.height / 2);
+    ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength), canvas.height / 2 + Math.sin(angle) * secondHandLength);
     ctx.stroke();
   }
 }
