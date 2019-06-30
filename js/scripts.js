@@ -33,6 +33,7 @@ function paintCanvas() {
   centerCircle();
   hourNotches();
   minuteNotches();
+  numbers();
   hourHand();
   minuteHand();
   secondHand();
@@ -93,6 +94,20 @@ function paintCanvas() {
       }
       ctx.lineWidth = 2;
       ctx.stroke();
+    }
+  }
+
+  // Draw numbers
+  function numbers() {
+    for (let i = 1; i < 13; i++) {
+      let angle = (i - 3) * (Math.PI * 2) / 12;
+      let x = canvas.width / 2 + Math.cos(angle) * secondHandLength / 1.25;
+      let y = canvas.height / 2 + Math.sin(angle) * secondHandLength / 1.25;
+      ctx.font = '16px arial';
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+      toggleDark === true ? ctx.fillStyle = '#fff' : ctx.fillStyle = '#000';
+      ctx.fillText(i, x, y);
     }
   }
 
@@ -160,4 +175,5 @@ function lightTheme() {
   }
 }
 
+// Today's date in the footer
 document.getElementById('date').innerHTML = mm + '/' + dd + '/' + yyyy;
