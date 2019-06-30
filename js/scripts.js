@@ -1,6 +1,11 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const button = document.getElementsByTagName('button');
 let secondHandLength = canvas.width / 2 - 16;
+let toggleDark = true;
+let toggleLight = false;
+let toggleWild = false;
+
 
 // Paint canvas every second
 setInterval(paintCanvas, 1000);
@@ -10,6 +15,12 @@ function paintCanvas() {
 
   // Clear the canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (toggleLight === true) {
+    ctx.strokeStyle = '#000';
+  } else {
+    ctx.strokeStyle = '#fff';
+  }
 
   // Draw circles & notches
   outerCircleOut();
@@ -24,14 +35,12 @@ function paintCanvas() {
   function outerCircleOut() {
     ctx.beginPath();
     ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2 - 10, 0, Math.PI * 2);
-    ctx.strokeStyle = '#fff';
     ctx.stroke();
   }
 
   function outerCircleIn() {
     ctx.beginPath();
     ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2 - 14, 0, Math.PI * 2);
-    ctx.strokeStyle = '#fff';
     ctx.stroke();
   }
 
@@ -39,7 +48,6 @@ function paintCanvas() {
   function centerCircle() {
     ctx.beginPath();
     ctx.arc(canvas.width / 2, canvas.height / 2, 4, 0, Math.PI * 2);
-    ctx.strokeStyle = '#fff';
     ctx.stroke();
   }
 
@@ -107,5 +115,29 @@ function paintCanvas() {
     ctx.moveTo(canvas.width / 2, canvas.height / 2);
     ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength), canvas.height / 2 + Math.sin(angle) * secondHandLength);
     ctx.stroke();
+  }
+}
+
+// Dark theme
+function darkTheme() {
+  toggleDark = true;
+  toggleLight = false;
+  toggleWild = false;
+  document.body.style.backgroundColor = '#191919';
+  document.body.style.color = '#fff';
+  for (let i = 0; i < 3; i++) {
+    button[i].className = 'dark';
+  }
+}
+
+// Light theme
+function lightTheme() {
+  toggleLight = true;
+  toggleDark = false;
+  toggleWild = false;
+  document.body.style.backgroundColor = '#e5e5e7';
+  document.body.style.color = '#000';
+  for (let i = 0; i < 3; i++) {
+    button[i].className = 'light';
   }
 }
