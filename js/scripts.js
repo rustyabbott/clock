@@ -85,11 +85,7 @@ function paintCanvas() {
       let y2 = canvas.height / 2 + Math.sin(angle) * (secondHandLength - secondHandLength / 8);
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
-      if (toggleDark === true) {
-        ctx.strokeStyle = '#1a9af9';
-      } else if (toggleLight === true) {
-        ctx.strokeStyle = '#000';
-      }
+      toggleDark === true ? ctx.strokeStyle = '#1a9af9' : ctx.strokeStyle = '#000';
       ctx.lineWidth = 2;
       ctx.stroke();
     }
