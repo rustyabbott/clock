@@ -12,4 +12,4 @@ Formulas within scripts.js use radians, not degrees.
 
 ### Screenshot
 
-![img/clock.png](img/clock.png)
+![img/clocks.png](img/clocks.png)
