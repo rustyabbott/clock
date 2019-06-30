@@ -5,20 +5,25 @@ let secondHandLength = canvas.width / 2 - 16;
 let toggleDark = true;
 let toggleLight = false;
 let toggleWild = false;
-
+let footerDate = new Date();
+let dd = footerDate.getDate();
+let mm = footerDate.getMonth() + 1;
+let yyyy = footerDate.getFullYear();
 
 // Paint canvas every second
 setInterval(paintCanvas, 1000);
 
+// Main canvas function
 function paintCanvas() {
   let date = new Date();
 
   // Clear the canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  // Toggle clock styles based on theme
   if (toggleLight === true) {
     ctx.strokeStyle = '#000';
-  } else {
+  } else if (toggleDark === true){
     ctx.strokeStyle = '#fff';
   }
 
@@ -35,12 +40,14 @@ function paintCanvas() {
   function outerCircleOut() {
     ctx.beginPath();
     ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2 - 10, 0, Math.PI * 2);
+    ctx.lineWidth = 2;
     ctx.stroke();
   }
 
   function outerCircleIn() {
     ctx.beginPath();
     ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2 - 14, 0, Math.PI * 2);
+    ctx.lineWidth = 2;
     ctx.stroke();
   }
 
@@ -48,22 +55,8 @@ function paintCanvas() {
   function centerCircle() {
     ctx.beginPath();
     ctx.arc(canvas.width / 2, canvas.height / 2, 4, 0, Math.PI * 2);
+    ctx.lineWidth = 2;
     ctx.stroke();
-  }
-
-  // Draw the hour notches
-  function hourNotches() {
-    for (let i = 0; i < 12; i++) {
-      let angle = (i - 3) * (Math.PI * 2) / 12;
-      ctx.beginPath();
-      let x1 = canvas.width / 2 + Math.cos(angle) * secondHandLength;
-      let y1 = canvas.height / 2 + Math.sin(angle) * secondHandLength;
-      let x2 = canvas.width / 2 + Math.cos(angle) * (secondHandLength - secondHandLength / 8);
-      let y2 = canvas.height / 2 + Math.sin(angle) * (secondHandLength - secondHandLength / 8);
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-    }
   }
 
   // Draw the minute notches
@@ -77,6 +70,28 @@ function paintCanvas() {
       let y2 = canvas.width / 2 + Math.sin(angle) * (secondHandLength - secondHandLength / 30);
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+  }
+
+  // Draw the hour notches
+  function hourNotches() {
+    for (let i = 0; i < 12; i++) {
+      let angle = (i - 3) * (Math.PI * 2) / 12;
+      ctx.beginPath();
+      let x1 = canvas.width / 2 + Math.cos(angle) * secondHandLength;
+      let y1 = canvas.height / 2 + Math.sin(angle) * secondHandLength;
+      let x2 = canvas.width / 2 + Math.cos(angle) * (secondHandLength - secondHandLength / 8);
+      let y2 = canvas.height / 2 + Math.sin(angle) * (secondHandLength - secondHandLength / 8);
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      if (toggleDark === true) {
+        ctx.strokeStyle = '#1a9af9';
+      } else if (toggleLight === true) {
+        ctx.strokeStyle = '#000';
+      }
+      ctx.lineWidth = 2;
       ctx.stroke();
     }
   }
@@ -89,6 +104,7 @@ function paintCanvas() {
     ctx.beginPath();
     ctx.moveTo(canvas.width / 2, canvas.height / 2);
     ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength / 1.6), canvas.height / 2 + Math.sin(angle) * secondHandLength / 1.6);
+    ctx.lineWidth = 4;
     ctx.stroke();
   }
 
@@ -97,11 +113,11 @@ function paintCanvas() {
     let hour = date.getHours();
     let min = date.getMinutes();
     let sec = date.getSeconds();
-    console.log('The time is ' + hour + ':' + min + ':' + sec);
     let angle = ((Math.PI * 2) * (min / 60) - ((Math.PI * 2)) / 4);
     ctx.beginPath();
     ctx.moveTo(canvas.width / 2, canvas.height / 2);
     ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength / 1.3), canvas.height / 2 + Math.sin(angle) * secondHandLength / 1.3);
+    ctx.lineWidth = 2;
     ctx.stroke();
   }
 
@@ -114,6 +130,8 @@ function paintCanvas() {
     ctx.lineTo((canvas.width / 2 - Math.cos(angle) * 20), canvas.height / 2 - Math.sin(angle) * 22);
     ctx.moveTo(canvas.width / 2, canvas.height / 2);
     ctx.lineTo((canvas.width / 2 + Math.cos(angle) * secondHandLength), canvas.height / 2 + Math.sin(angle) * secondHandLength);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#ff3300';
     ctx.stroke();
   }
 }
@@ -141,3 +159,5 @@ function lightTheme() {
     button[i].className = 'light';
   }
 }
+
+document.getElementById('date').innerHTML = mm + '/' + dd + '/' + yyyy;
