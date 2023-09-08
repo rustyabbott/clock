@@ -4,7 +4,7 @@ This is a simple analog clock made with JavaScript, HTML, and CSS. It utilizes H
 
 ### View Online
 
-* [https://rustyabbott.com/clock](https://rustyabbott.com/clock)
+* [https://rustyabbott.github.io/clock/](https://rustyabbott.github.io/clock/)
 
 ### Note
 
